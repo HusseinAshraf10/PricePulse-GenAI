@@ -64,28 +64,28 @@ def run_price_tracker():
 if __name__ == "__main__":
     log = BotLogger()
     log.logger.info("Price Intelligence System scheduling engine initialized.")
-
-    while True:
-        try:
-            now = datetime.now()
-            target_time = now.replace(hour=9, minute=0, second=0, microsecond=0)
-
-            # If it's already past 9:00 AM, calculate the wait time for 9:00 AM TOMORROW
-            if now >= target_time:
-                from datetime import timedelta
-                target_time += timedelta(days=1)
-
-
-            seconds_to_wait = (target_time - now).total_seconds()
-            log.logger.info(
-                f"System resting. Next pipeline run scheduled for {target_time} (Waiting {seconds_to_wait:.0f} seconds)...")
-
-            time.sleep(seconds_to_wait)
-            run_price_tracker()
-
-        except KeyboardInterrupt:
-            log.logger.info("Automation loop terminated safely by user request.")
-            break
-        except Exception as system_error:
-            log.logger.error(f"Critical scheduler exception encountered: {system_error}")
-            time.sleep(60)
+    run_price_tracker()
+    # while True:
+    #     try:
+    #         now = datetime.now()
+    #         target_time = now.replace(hour=9, minute=0, second=0, microsecond=0)
+    #
+    #         # If it's already past 9:00 AM, calculate the wait time for 9:00 AM TOMORROW
+    #         if now >= target_time:
+    #             from datetime import timedelta
+    #             target_time += timedelta(days=1)
+    #
+    #
+    #         seconds_to_wait = (target_time - now).total_seconds()
+    #         log.logger.info(
+    #             f"System resting. Next pipeline run scheduled for {target_time} (Waiting {seconds_to_wait:.0f} seconds)...")
+    #
+    #         time.sleep(seconds_to_wait)
+    #         run_price_tracker()
+    #
+    #     except KeyboardInterrupt:
+    #         log.logger.info("Automation loop terminated safely by user request.")
+    #         break
+    #     except Exception as system_error:
+    #         log.logger.error(f"Critical scheduler exception encountered: {system_error}")
+    #         time.sleep(60)
