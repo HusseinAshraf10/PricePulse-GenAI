@@ -13,7 +13,9 @@ def run_price_tracker():
     log = BotLogger()
     log.logger.info("Starting the Price Intelligence Pipeline automation...")
 
-    product_URL = os.getenv("TARGET_PRODUCT_URL")
+    if os.getenv("GITHUB_ACTIONS"):
+        os.environ["GEMINI_API_KEY"] = os.getenv("GEMINI_API_KEY", "")
+
     scraper = NoonScraper()
     sheets_client = GoogleSheetsClient()
     analyst = PriceIntelligenceAnalyst()
