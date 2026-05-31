@@ -32,12 +32,14 @@ jobs:
 
     - name: Execute Price Intelligence Bot
       env:
-        # Securely injection keys from GitHub Secrets into the machine memory
+        # Exposes the secret directly to the operating system environment
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TARGET_PRODUCT_URL: ${{ secrets.TARGET_PRODUCT_URL }}
       run: |
-        # Write the temporary Google Sheets JSON access badge file from the secret repository value
-        echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}' > service_account.json
+        # Securely reconstructs the raw formatting structure of your service account credentials
+        cat << 'EOF' > service_account.json
+        ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        EOF
         python main.py
+        
