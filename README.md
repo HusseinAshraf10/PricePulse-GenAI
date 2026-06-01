@@ -1,4 +1,5 @@
  PricePulse-GenAI
+ 
 An automated price monitoring bot that tracks Noon.com products daily, analyzes price trends with Gemini 2.5, and sends a morning report straight to your phone via Telegram.
 Built with Python, Selenium, Google Sheets, and GitHub Actions — runs completely free, every day, with zero manual work.
 
